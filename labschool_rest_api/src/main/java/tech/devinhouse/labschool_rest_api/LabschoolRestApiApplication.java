@@ -1,9 +1,13 @@
 package tech.devinhouse.labschool_rest_api;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.support.ReloadableResourceBundleMessageSource;
+import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 import tech.devinhouse.labschool_rest_api.model.Aluno;
 import tech.devinhouse.labschool_rest_api.model.Pedagogo;
 import tech.devinhouse.labschool_rest_api.model.Professor;
@@ -54,6 +58,27 @@ public class LabschoolRestApiApplication {
 				pedagogoService.criar(new Pedagogo("Sandor Clegane", "11-33333-2222", LocalDate.of(1995, 10, 30), 89089606009L));
 			}
 		};
+	}
+
+	@Bean
+	public MessageSource messageSource() {
+		ReloadableResourceBundleMessageSource messageSource = new ReloadableResourceBundleMessageSource();
+		messageSource.setBasename("classpath:messages");
+		messageSource.setDefaultEncoding("UTF-8");
+		return messageSource;
+	}
+
+	@Bean
+	public LocalValidatorFactoryBean validator() {
+		LocalValidatorFactoryBean bean = new LocalValidatorFactoryBean();
+		bean.setValidationMessageSource(messageSource());
+		return bean;
+	}
+
+	@Bean
+	public ModelMapper modelMapper() {
+		ModelMapper modelMapper = new ModelMapper();
+		return modelMapper;
 	}
 
 }
