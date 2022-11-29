@@ -19,7 +19,7 @@ public class AlunoResponse {
 
     private Long cpf;
 
-    private SituacaoMatricula situacao;
+    private String situacao;
 
     private Float nota;
 

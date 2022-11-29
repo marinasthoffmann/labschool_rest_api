@@ -25,10 +25,10 @@ public class AlunoRequest {
     @Digits(integer = 11, fraction = 0)
     private Long cpf;
 
-    @NotNull(message = "{campo.obrigatorio}")
-//    @Pattern(regexp = "ATIVO|IRREGULAR|ATENDIMENTO_PEDAGOGICO|INATIVO",
-//            flags = Pattern.Flag.CASE_INSENSITIVE, message = "{campo.invalido}") TODO
-    private SituacaoMatricula situacao;
+    @NotEmpty(message = "{campo.obrigatorio}")
+    @Pattern(regexp = "ATIVO|IRREGULAR|ATENDIMENTO_PEDAGOGICO|INATIVO",
+            flags = Pattern.Flag.CASE_INSENSITIVE, message = "{campo.invalido}")
+    private String situacao;
 
     @NotNull(message = "{campo.obrigatorio}")
     @Min(0)
