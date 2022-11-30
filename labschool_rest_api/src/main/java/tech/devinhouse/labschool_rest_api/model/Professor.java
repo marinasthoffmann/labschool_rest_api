@@ -1,15 +1,15 @@
 package tech.devinhouse.labschool_rest_api.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import tech.devinhouse.labschool_rest_api.model.enums.Estado;
 import tech.devinhouse.labschool_rest_api.model.enums.ExperienciaDesenvolvimento;
 import tech.devinhouse.labschool_rest_api.model.enums.FormacaoAcademica;
 
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.Table;
 import java.time.LocalDate;
 
 @Data

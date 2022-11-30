@@ -1,8 +1,6 @@
 package tech.devinhouse.labschool_rest_api.dto;
 
-import jakarta.validation.constraints.*;
 import lombok.Data;
-import tech.devinhouse.labschool_rest_api.model.enums.SituacaoMatricula;
 
 import java.time.LocalDate;
 

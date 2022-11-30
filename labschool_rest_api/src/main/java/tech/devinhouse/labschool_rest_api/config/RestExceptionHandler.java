@@ -1,7 +1,5 @@
 package tech.devinhouse.labschool_rest_api.config;
 
-import jakarta.validation.ConstraintViolationException;
-import jakarta.validation.Path;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,6 +14,8 @@ import tech.devinhouse.labschool_rest_api.dto.ErroResponse;
 import tech.devinhouse.labschool_rest_api.exception.RegistroExistenteException;
 import tech.devinhouse.labschool_rest_api.exception.RegistroNaoEncontradoException;
 
+import javax.validation.ConstraintViolationException;
+import javax.validation.Path;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -51,21 +51,21 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(erro);
     }
 
-//    @Override
-//    public ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
-//        Map<String, String> fieldErrors = new HashMap<>();
-//        ex.getBindingResult().getAllErrors().forEach(error -> {
-//            String fieldName = ((FieldError) error).getField();
-//            String errorMessage = error.getDefaultMessage();
-//            fieldErrors.put(fieldName, errorMessage);
-//        });
-//        ErroResponse erro = new ErroResponse("Erro de validação", fieldErrors);
-//        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(erro);
-//    }
+    @Override
+    public ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
+        Map<String, String> camposComErros = new HashMap<>();
+        ex.getBindingResult().getAllErrors().forEach(error -> {
+            String nomeDoCampo = ((FieldError) error).getField();
+            String msgDeErro = error.getDefaultMessage();
+            camposComErros.put(nomeDoCampo, msgDeErro);
+        });
+        ErroResponse erro = new ErroResponse("Erro de validação", camposComErros);
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(erro);
+    }
 
-//    @Override
-//    public ResponseEntity<Object> handleHttpMessageNotReadable(HttpMessageNotReadableException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
-//        ErroResponse erro = new ErroResponse("Json com formato inválido");
-//        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(erro);
-//    }
+    @Override
+    public ResponseEntity<Object> handleHttpMessageNotReadable(HttpMessageNotReadableException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
+        ErroResponse erro = new ErroResponse("Json com formato inválido");
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(erro);
+    }
 }

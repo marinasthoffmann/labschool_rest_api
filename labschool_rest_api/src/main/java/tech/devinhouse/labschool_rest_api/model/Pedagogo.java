@@ -1,10 +1,10 @@
 package tech.devinhouse.labschool_rest_api.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import java.time.LocalDate;
 
 @Data

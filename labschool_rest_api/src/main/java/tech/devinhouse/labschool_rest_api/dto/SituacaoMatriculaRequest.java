@@ -1,8 +1,9 @@
 package tech.devinhouse.labschool_rest_api.dto;
 
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.Pattern;
 import lombok.Data;
+
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Pattern;
 
 @Data
 public class SituacaoMatriculaRequest {
