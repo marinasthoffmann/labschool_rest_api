@@ -1,9 +1,7 @@
 package tech.devinhouse.labschool_rest_api.service;
 
 import lombok.AllArgsConstructor;
-import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
-import tech.devinhouse.labschool_rest_api.dto.AlunoResponse;
 import tech.devinhouse.labschool_rest_api.exception.RegistroExistenteException;
 import tech.devinhouse.labschool_rest_api.exception.RegistroNaoEncontradoException;
 import tech.devinhouse.labschool_rest_api.model.Aluno;
@@ -19,7 +17,6 @@ import java.util.Optional;
 public class AlunoService {
 
     private AlunoRepository repository;
-    private ModelMapper mapper;
 
     public List<Aluno> consultar(){
         return repository.findAll();
@@ -58,5 +55,12 @@ public class AlunoService {
         aluno.setSituacao(SituacaoMatricula.valueOf(situacaoMatricula));
         aluno = repository.save(aluno);
         return aluno;
+    }
+
+    public void excluir(Integer codigo) throws RegistroNaoEncontradoException {
+        Optional<Aluno> alunoOptional = repository.findById(codigo);
+        if(alunoOptional.isEmpty())
+            throw new RegistroNaoEncontradoException("Aluno", codigo);
+        repository.delete(alunoOptional.get());
     }
 }

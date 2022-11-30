@@ -68,4 +68,10 @@ public class AlunoController {
         AlunoResponse response = mapper.map(aluno, AlunoResponse.class);
         return ResponseEntity.ok(response);
     }
+
+    @DeleteMapping("{codigo}")
+    public ResponseEntity excluir(@PathVariable("codigo") @Valid Integer codigo) throws RegistroNaoEncontradoException {
+        service.excluir(codigo);
+        return ResponseEntity.noContent().build();
+    }
 }
