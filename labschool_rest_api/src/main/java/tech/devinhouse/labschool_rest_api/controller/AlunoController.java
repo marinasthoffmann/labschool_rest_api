@@ -1,7 +1,6 @@
 package tech.devinhouse.labschool_rest_api.controller;
 
 import lombok.AllArgsConstructor;
-import org.hibernate.query.Query;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -10,12 +9,10 @@ import tech.devinhouse.labschool_rest_api.dto.AlunoResponse;
 import tech.devinhouse.labschool_rest_api.dto.SituacaoMatriculaRequest;
 import tech.devinhouse.labschool_rest_api.exception.RegistroNaoEncontradoException;
 import tech.devinhouse.labschool_rest_api.model.Aluno;
-import tech.devinhouse.labschool_rest_api.model.enums.SituacaoMatricula;
 import tech.devinhouse.labschool_rest_api.service.AlunoService;
 
 import javax.validation.Valid;
 import java.net.URI;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 

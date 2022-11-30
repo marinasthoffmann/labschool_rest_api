@@ -19,19 +19,19 @@ import java.time.LocalDate;
 public class Professor extends Pessoa{
 
     @Enumerated(EnumType.STRING)
-    private FormacaoAcademica formacaoAcademica;
+    private FormacaoAcademica formacao;
 
     @Enumerated(EnumType.STRING)
     private Estado estado;
 
     @Enumerated(EnumType.STRING)
-    private ExperienciaDesenvolvimento experienciaDesenvolvimento;
+    private ExperienciaDesenvolvimento experiencia;
 
     public Professor(String nome, String telefone, LocalDate dataNascimento, Long cpf, FormacaoAcademica formacaoAcademica, Estado estado, ExperienciaDesenvolvimento experienciaDesenvolvimento) {
         super(nome, telefone, dataNascimento, cpf);
-        this.formacaoAcademica = formacaoAcademica;
+        this.formacao = formacaoAcademica;
         this.estado = estado;
-        this.experienciaDesenvolvimento = experienciaDesenvolvimento;
+        this.experiencia = experienciaDesenvolvimento;
     }
 
     public Professor() {
