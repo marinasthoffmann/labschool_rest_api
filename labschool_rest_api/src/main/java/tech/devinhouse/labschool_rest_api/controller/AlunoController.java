@@ -61,4 +61,11 @@ public class AlunoController {
         return ResponseEntity.ok(response);
     }
 
+    @GetMapping("{codigo}")
+    public ResponseEntity<AlunoResponse> consultarPorId(@PathVariable("codigo") @Valid Integer codigo)
+            throws RegistroNaoEncontradoException {
+        Aluno aluno = service.consultar(codigo);
+        AlunoResponse response = mapper.map(aluno, AlunoResponse.class);
+        return ResponseEntity.ok(response);
+    }
 }

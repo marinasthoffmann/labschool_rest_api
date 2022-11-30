@@ -34,6 +34,13 @@ public class AlunoService {
         return alunos;
     }
 
+    public Aluno consultar(Integer codigo) throws RegistroNaoEncontradoException {
+        Optional<Aluno> alunoOptional = repository.findById(codigo);
+        if(alunoOptional.isEmpty())
+            throw new RegistroNaoEncontradoException("Aluno", codigo);
+        return alunoOptional.get();
+    }
+
     public Aluno criar(Aluno aluno){
         boolean alunoExistente = repository.existsAlunoByCpf(aluno.getCpf());
         if (alunoExistente)

@@ -9,5 +9,4 @@ import tech.devinhouse.labschool_rest_api.model.enums.SituacaoMatricula;
 public interface AlunoRepository extends JpaRepository<Aluno, Integer> {
 
     boolean existsAlunoByCpf(Long cpf);
-    Aluno findAlunoBySituacao(SituacaoMatricula situacaoMatricula);
 }
