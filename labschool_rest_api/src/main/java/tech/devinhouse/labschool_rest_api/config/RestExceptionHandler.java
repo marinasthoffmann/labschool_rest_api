@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 import tech.devinhouse.labschool_rest_api.dto.ErroResponse;
+import tech.devinhouse.labschool_rest_api.exception.AlunoJaEmAtendimentoException;
 import tech.devinhouse.labschool_rest_api.exception.RegistroExistenteException;
 import tech.devinhouse.labschool_rest_api.exception.RegistroNaoEncontradoException;
 
@@ -33,6 +34,12 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
     public ResponseEntity<Object> handleRegistroNaoEncontradoException(RegistroNaoEncontradoException e) {
         ErroResponse erro = new ErroResponse(e.getMessage());
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(erro);
+    }
+
+    @ExceptionHandler(AlunoJaEmAtendimentoException.class)
+    public ResponseEntity<Object> handleAlunoJaEmAtendimentoException(AlunoJaEmAtendimentoException e) {
+        ErroResponse erro = new ErroResponse(e.getMessage());
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(erro);
     }
 
     @ExceptionHandler(ConstraintViolationException.class)

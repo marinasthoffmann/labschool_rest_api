@@ -30,7 +30,7 @@ public class AlunoRequest {
     private String situacao;
 
     @NotNull(message = "{campo.obrigatorio}")
-    @Min(0)
-    @Max(10)
+    @Min(value = 0, message = "{campo.invalido}")
+    @Max(value = 10, message = "{campo.invalido}")
     private Float nota;
 }
