@@ -46,7 +46,7 @@ public class LabschoolRestApiApplication {
 				professorService.criar(new Professor("Walter White", "14-22998-1882", LocalDate.of(1982, 10, 30), 40539019011L, FormacaoAcademica.MESTRADO, Estado.ATIVO, ExperienciaDesenvolvimento.FULL_STACK));
 				professorService.criar(new Professor("Jesse Pinkman", "44-11111-1992", LocalDate.of(1997, 10, 30), 96107295097L, FormacaoAcademica.GRADUACAO_INCOMPLETA, Estado.ATIVO, ExperienciaDesenvolvimento.BACK_END));
 				professorService.criar(new Professor("Hank Schrader", "44-11111-1002", LocalDate.of(1984, 10, 30), 70685977005L, FormacaoAcademica.MESTRADO, Estado.ATIVO, ExperienciaDesenvolvimento.FULL_STACK));
-				professorService.criar(new Professor("Gustavo Fring", "44-11001-1002", LocalDate.of(1977, 10, 30), 57408927085L, FormacaoAcademica.GRADUCAO_COMPLETA, Estado.INATIVO, ExperienciaDesenvolvimento.FRONT_END));
+				professorService.criar(new Professor("Gustavo Fring", "44-11001-1002", LocalDate.of(1977, 10, 30), 57408927085L, FormacaoAcademica.GRADUACAO_COMPLETA, Estado.INATIVO, ExperienciaDesenvolvimento.FRONT_END));
 				professorService.criar(new Professor("Saul Goodman", "44-11998-1882", LocalDate.of(1980, 10, 30), 86940162062L, FormacaoAcademica.MESTRADO, Estado.ATIVO, ExperienciaDesenvolvimento.FULL_STACK));
 			}
 

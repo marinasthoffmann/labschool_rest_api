@@ -2,6 +2,7 @@ package tech.devinhouse.labschool_rest_api.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import tech.devinhouse.labschool_rest_api.model.enums.Estado;
 import tech.devinhouse.labschool_rest_api.model.enums.ExperienciaDesenvolvimento;
 import tech.devinhouse.labschool_rest_api.model.enums.FormacaoAcademica;
@@ -16,6 +17,7 @@ import java.time.LocalDate;
 @Entity
 @Table(name = "PROFESSORES")
 @AllArgsConstructor
+@NoArgsConstructor
 public class Professor extends Pessoa{
 
     @Enumerated(EnumType.STRING)
@@ -32,9 +34,5 @@ public class Professor extends Pessoa{
         this.formacao = formacaoAcademica;
         this.estado = estado;
         this.experiencia = experienciaDesenvolvimento;
-    }
-
-    public Professor() {
-
     }
 }
