@@ -2,6 +2,7 @@ package tech.devinhouse.labschool_rest_api.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import tech.devinhouse.labschool_rest_api.model.enums.SituacaoMatricula;
 
 import javax.persistence.Entity;
@@ -14,6 +15,7 @@ import java.time.LocalDate;
 @Entity
 @Table(name = "ALUNOS")
 @AllArgsConstructor
+@NoArgsConstructor
 public class Aluno extends Pessoa{
 
     @Enumerated(EnumType.STRING)
@@ -27,9 +29,5 @@ public class Aluno extends Pessoa{
         this.situacao = situacaoMatricula;
         this.nota = nota;
         this.atendimentos = 0;
-    }
-
-    public Aluno() {
-
     }
 }

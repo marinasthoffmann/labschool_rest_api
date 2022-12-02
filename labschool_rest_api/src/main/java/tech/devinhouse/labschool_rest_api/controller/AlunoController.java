@@ -33,7 +33,7 @@ public class AlunoController {
     }
 
     @PutMapping("{codigo}")
-    public ResponseEntity<AlunoResponse> atualizarSituacao(@PathVariable("codigo") @Valid Integer codigo,
+    public ResponseEntity<AlunoResponse> atualizarSituacao(@PathVariable("codigo") Integer codigo,
                                                            @RequestBody @Valid SituacaoMatriculaRequest request)
             throws RegistroNaoEncontradoException {
         String situacaoMatricula = request.getSituacao();
@@ -47,10 +47,7 @@ public class AlunoController {
             @RequestParam(value = "situacao", required = false) String situacao){
 
         List<Aluno> alunos;
-        if (situacao == null)
-            alunos = service.consultar();
-        else
-            alunos = service.consultar(situacao);
+        alunos = (situacao == null) ? service.consultar() : service.consultar(situacao);
 
         List<AlunoResponse> response = alunos.stream().map(a-> mapper.map(a, AlunoResponse.class)).
                 collect(Collectors.toList());
@@ -59,7 +56,7 @@ public class AlunoController {
     }
 
     @GetMapping("{codigo}")
-    public ResponseEntity<AlunoResponse> consultarPorId(@PathVariable("codigo") @Valid Integer codigo)
+    public ResponseEntity<AlunoResponse> consultarPorId(@PathVariable("codigo") Integer codigo)
             throws RegistroNaoEncontradoException {
         Aluno aluno = service.consultar(codigo);
         AlunoResponse response = mapper.map(aluno, AlunoResponse.class);
@@ -67,7 +64,7 @@ public class AlunoController {
     }
 
     @DeleteMapping("{codigo}")
-    public ResponseEntity excluir(@PathVariable("codigo") @Valid Integer codigo) throws RegistroNaoEncontradoException {
+    public ResponseEntity excluir(@PathVariable("codigo") Integer codigo) throws RegistroNaoEncontradoException {
         service.excluir(codigo);
         return ResponseEntity.noContent().build();
     }

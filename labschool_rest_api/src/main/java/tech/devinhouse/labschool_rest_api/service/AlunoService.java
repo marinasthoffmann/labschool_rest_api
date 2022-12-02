@@ -10,7 +10,6 @@ import tech.devinhouse.labschool_rest_api.repository.AlunoRepository;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @AllArgsConstructor
@@ -24,18 +23,12 @@ public class AlunoService {
 
     public List<Aluno> consultar(String situacao) {
         List<Aluno> alunos = new ArrayList<>();
-        for (Aluno aluno : consultar()){
-            if(aluno.getSituacao().toString().equals(situacao))
-                alunos.add(aluno);
-        }
+        consultar().stream().filter(a -> a.getSituacao().toString().equals(situacao)).forEach(alunos::add);
         return alunos;
     }
 
     public Aluno consultar(Integer codigo) throws RegistroNaoEncontradoException {
-        Optional<Aluno> alunoOptional = repository.findById(codigo);
-        if(alunoOptional.isEmpty())
-            throw new RegistroNaoEncontradoException("Aluno", codigo);
-        return alunoOptional.get();
+        return repository.findById(codigo).orElseThrow(() -> new RegistroNaoEncontradoException("Aluno", codigo));
     }
 
     public Aluno criar(Aluno aluno){
@@ -48,19 +41,17 @@ public class AlunoService {
     }
 
     public Aluno atualizar(Integer codigo, String situacaoMatricula) throws RegistroNaoEncontradoException {
-        Optional<Aluno> alunoOptional = repository.findById(codigo);
-        if(alunoOptional.isEmpty())
-            throw new RegistroNaoEncontradoException("Aluno", codigo);
-        Aluno aluno = alunoOptional.get();
+        Aluno aluno = repository.findById(codigo)
+                .orElseThrow(() -> new RegistroNaoEncontradoException(Aluno.class.getSimpleName(), codigo));
+
         aluno.setSituacao(SituacaoMatricula.valueOf(situacaoMatricula));
         aluno = repository.save(aluno);
         return aluno;
     }
 
     public void excluir(Integer codigo) throws RegistroNaoEncontradoException {
-        Optional<Aluno> alunoOptional = repository.findById(codigo);
-        if(alunoOptional.isEmpty())
-            throw new RegistroNaoEncontradoException("Aluno", codigo);
-        repository.delete(alunoOptional.get());
+        Aluno aluno = repository.findById(codigo)
+                .orElseThrow(() -> new RegistroNaoEncontradoException(Aluno.class.getSimpleName(), codigo));
+        repository.delete(aluno);
     }
 }
