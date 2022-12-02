@@ -10,8 +10,6 @@ import tech.devinhouse.labschool_rest_api.model.enums.SituacaoMatricula;
 import tech.devinhouse.labschool_rest_api.repository.AlunoRepository;
 import tech.devinhouse.labschool_rest_api.repository.PedagogoRepository;
 
-import java.util.Optional;
-
 @Service
 @AllArgsConstructor
 public class AtendimentoService {
@@ -22,14 +20,12 @@ public class AtendimentoService {
     public void realizarAtendimento(Integer codigoAluno, Integer codigoPedagogo)
             throws RegistroNaoEncontradoException, AlunoJaEmAtendimentoException {
 
-        Optional<Aluno> alunoOptional = alunoRepository.findById(codigoAluno);
-        Optional<Pedagogo> pedagogoOptional = pedagogoRepository.findById(codigoPedagogo);
-        validaCodigos(alunoOptional, pedagogoOptional, codigoAluno, codigoPedagogo);
+        Aluno aluno = alunoRepository.findById(codigoAluno)
+                .orElseThrow(() -> new RegistroNaoEncontradoException(Aluno.class.getSimpleName(), codigoAluno));
+        Pedagogo pedagogo = pedagogoRepository.findById(codigoPedagogo)
+                .orElseThrow(() -> new RegistroNaoEncontradoException(Pedagogo.class.getSimpleName(), codigoPedagogo));
 
-        Aluno aluno = alunoOptional.get();
         atualizaAluno(aluno);
-
-        Pedagogo pedagogo = pedagogoOptional.get();
         atualizaPedagogo(pedagogo);
     }
 
@@ -44,14 +40,6 @@ public class AtendimentoService {
     public void atualizaPedagogo(Pedagogo pedagogo) {
         pedagogo.setAtendimentos(pedagogo.getAtendimentos() + 1);
         pedagogoRepository.save(pedagogo);
-    }
-
-    public void validaCodigos(Optional alunoOptional, Optional pedagogoOptional,
-                              Integer codigoAluno, Integer codigoPedagogo) throws RegistroNaoEncontradoException {
-        if (alunoOptional.isEmpty())
-            throw new RegistroNaoEncontradoException("Aluno", codigoAluno);
-        else if (pedagogoOptional.isEmpty())
-            throw new RegistroNaoEncontradoException("Pedagogo", codigoPedagogo);
     }
 
     public Aluno consultaAlunoAtendido(Integer codigoAluno){
