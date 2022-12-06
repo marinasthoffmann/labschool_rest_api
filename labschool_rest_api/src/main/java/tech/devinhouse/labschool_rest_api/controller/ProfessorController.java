@@ -1,5 +1,8 @@
 package tech.devinhouse.labschool_rest_api.controller;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.ResponseEntity;
@@ -21,6 +24,12 @@ public class ProfessorController {
     private ProfessorService service;
     private ModelMapper mapper;
 
+    @Operation(summary = "Serviço de consulta de professores", description = "Serviço de consulta de professores.")
+    @ApiResponses(
+            value = {
+                    @ApiResponse(responseCode = "200", description = "Consulta de professores realizada com sucesso")
+            }
+    )
     @GetMapping
     public ResponseEntity<List<ProfessorResponse>> consultar(){
         List<Professor> professores = service.consultar();
