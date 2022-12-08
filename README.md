@@ -1,4 +1,4 @@
-# Labschool - REST API
+# Lab School - REST API
 Projeto referente ao módulo 1 do programa de formação DEVinHouse. Contexto: A escola de programação Lab School deseja automatizar todo o sistema de armazenamento de informações referentes aos alunos, pedagogos e professores. O projeto envolve a criação de uma API aplicando conceitos de programação orientada objetos, modelagem e API REST. Os recursos tecnológicos utilizados para o desenvolvimento desta API são os seguintes:
 
 - Desenvolvida na linguagem Java;
